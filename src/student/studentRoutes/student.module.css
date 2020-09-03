@@ -1,0 +1,37 @@
+.studentPage h1 {
+    color: rgb(9, 128, 62);
+    text-align: center;
+    margin: 20px auto 0;
+    text-transform: uppercase;
+}
+
+.studentBanner {
+    display: block;
+    max-width: 768px;
+    width: 90%;
+    margin: 20px auto;
+    -webkit-box-shadow: 0px 0px 11px 2px rgb(137, 186, 230);
+    -moz-box-shadow: 0px 0px 11px 2px rgba(173, 209, 240, 1);
+    box-shadow: 0px 0px 11px 2px rgba(173, 209, 240, 1);
+}
+
+.formLayout label {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0px 0px 0px 35px;
+}
+
+.formLayout select {
+    display: block;
+    width: 80%;
+    max-width: 668px;
+    margin: 10px auto 20px;
+    padding: 5px;
+    border: 1px solid rgb(142, 143, 145);
+    border-radius: 3px;
+    font-size: 18px;
+}
+
+.formLayout select:hover {
+    border: 2px solid rgb(75, 75, 75);
+}

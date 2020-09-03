@@ -1,0 +1,14 @@
+.inputStyles {
+    display: block;
+    width: 80%;
+    max-width: 668px;
+    margin: 10px auto 20px;
+    padding: 5px;
+    border: 1px solid rgb(142, 143, 145);
+    border-radius: 3px;
+    font-size: 18px;
+}
+
+.inputStyles:hover {
+    border: 2px solid rgb(75, 75, 75);
+}

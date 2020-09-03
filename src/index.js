@@ -1,11 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import Home from "./Home";
 
 ReactDOM.render(
-  <React.StrictMode>
+  <BrowserRouter>
     <Home />
-  </React.StrictMode>,
+  </BrowserRouter>,
   document.getElementById("root")
 );
