@@ -10,6 +10,7 @@ export default class Input extends React.Component {
           type={this.props.type}
           value={this.props.value}
           name={this.props.name}
+          placeholder={this.props.placeholder}
           onClick={this.props.onClick}
           onChange={this.props.onChange}
         />

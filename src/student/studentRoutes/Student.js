@@ -2,7 +2,68 @@ import React from "react";
 import styles from "./student.module.css";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
+
+const initialState = {
+  name: "",
+  rollNo: "",
+  class: "",
+  section: "",
+  nameError: "",
+  rollNoError: "",
+  classError: "",
+  sectionError: "",
+};
 class Student extends React.Component {
+  state = {
+    initialState,
+  };
+
+  handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  validate = () => {
+    let nameError = "";
+    let rollNoError = "";
+    let classError = "";
+    let sectionError = "";
+
+    if (!this.state.name) {
+      nameError = "Name cannot be empty";
+    }
+    if (!this.state.rollNo) {
+      rollNoError = "Please insert your Roll No:";
+    }
+    if (!this.state.class) {
+      classError = "Please select your class";
+    }
+    if (!this.state.section) {
+      sectionError = "Please select your class section";
+    }
+
+    if (nameError || rollNoError || classError || sectionError) {
+      this.setState({
+        nameError,
+        rollNoError,
+        classError,
+        sectionError,
+      });
+      return false;
+    }
+
+    return true;
+  };
+  handleSubmit = (event) => {
+    event.preventDefault();
+    const isValid = this.validate();
+    if (isValid) {
+      console.log(this.state);
+      // clear the form
+      this.setState(initialState);
+    }
+  };
   render() {
     return (
       <div className={styles.studentPage}>
@@ -13,18 +74,38 @@ class Student extends React.Component {
             src={require("../../shared/assets/students.jpg")}
             alt="Students_illustration"
           />
-          <form>
+          <form onSubmit={this.handleSubmit}>
             <div className={styles.formLayout}>
               <label>Name </label>
-              <Input type="text" />
+              <Input
+                type="text"
+                placeholder="Name"
+                name="name"
+                value={this.state.name}
+                onChange={this.handleChange}
+              />
+              <div className={styles.errors}>{this.state.nameError}</div>
             </div>
             <div className={styles.formLayout}>
               <label>Roll No.</label>
-              <Input type="number" />
+              <Input
+                type="number"
+                placeholder="Ex: 1,2,3..."
+                name="rollNo"
+                value={this.state.rollNo}
+                onChange={this.handleChange}
+              />
+              <div className={styles.errors}>{this.state.rollNoError}</div>
             </div>
+
             <div className={styles.formLayout}>
               <label>Class</label>
-              <select>
+              <select
+                value={this.state.class}
+                name="class"
+                onChange={this.handleChange}
+              >
+                <option>Select Class</option>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -38,10 +119,16 @@ class Student extends React.Component {
                 <option>11</option>
                 <option>12</option>
               </select>
+              <div className={styles.errors}>{this.state.classError}</div>
             </div>
             <div className={styles.formLayout}>
               <label>Section</label>
-              <select>
+              <select
+                value={this.state.section}
+                name="section"
+                onChange={this.handleChange}
+              >
+                <option>Select Section</option>
                 <option>A</option>
                 <option>B</option>
                 <option>C</option>
@@ -49,8 +136,9 @@ class Student extends React.Component {
                 <option>E</option>
                 <option>F</option>
               </select>
+              <div className={styles.errors}>{this.state.sectionError}</div>
             </div>
-            <Button btnName="Submit" />
+            <Button btnName="Submit" type="submit" />
           </form>
         </div>
       </div>

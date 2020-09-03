@@ -5,7 +5,13 @@ export default class Button extends React.Component {
   render() {
     return (
       <>
-        <button className={styles.btnStyle}>{this.props.btnName}</button>
+        <button
+          className={styles.btnStyle}
+          type={this.props.type}
+          onSubmit={this.props.onSubmit}
+        >
+          {this.props.btnName}
+        </button>
       </>
     );
   }
