@@ -22,7 +22,7 @@
 .formLayout label {
     display: block;
     max-width: 668px;
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     font-size: 18px;
     font-weight: 600;
@@ -30,7 +30,7 @@
 
 .formLayout select {
     display: block;
-    width: 80%;
+    width: 90%;
     max-width: 668px;
     margin: 10px auto 0;
     padding: 5px;
@@ -47,7 +47,7 @@
 .errors {
     display: block;
     max-width: 668px;
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     color: rgb(204, 2, 2);
     font-size: 14px;
@@ -57,4 +57,30 @@
 .formLayout select option {
     padding: 7px;
     font-size: 18px;
+}
+
+.teacherDetails {
+    text-align: center;
+    width: 90%;
+    max-width: 668px;
+    margin: 0 auto 40px;
+    border-radius: 3px;
+}
+
+.teacherDetails thead th {
+    color: rgb(207, 216, 223);
+    background-color: rgb(45, 57, 59);
+    padding: 8px 2px;
+}
+
+.teacherDetails thead th i {
+    padding: 0 8px;
+}
+
+.teacherDetails tbody td {
+    border: 1px solid rgba(77, 77, 77, 0.438);
+    background-color: rgb(209, 232, 252);
+    color: rgb(72, 74, 77);
+    font-size: 18px;
+    text-transform: capitalize;
 }

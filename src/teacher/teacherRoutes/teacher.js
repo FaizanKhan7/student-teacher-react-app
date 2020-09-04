@@ -16,6 +16,7 @@ const initialState = {
 class Teacher extends React.Component {
   state = {
     initialState,
+    tFeildDetails: [],
   };
 
   handleChange = (event) => {
@@ -23,6 +24,49 @@ class Teacher extends React.Component {
       [event.target.name]: event.target.value,
     });
   };
+
+  componentDidMount() {
+    if (!localStorage.getItem("teacher_data")) {
+      localStorage.setItem("teacher_data", JSON.stringify({ teacherDate: [] }));
+    }
+
+    let tDetials = JSON.parse(localStorage.getItem("teacher_data"));
+    this.setState({
+      tFeildDetails: tDetials ? tDetials.teacherDate : [],
+    });
+    // let tFeildDetails = [];
+    // let tDetials = JSON.parse(localStorage.getItem("teacher_data"));
+    // tDetials = tDetials ? tDetials : [];
+
+    // for (
+    //   let i = 0;
+    //   i <
+    //   (tDetials &&
+    //     tDetials.existingTeacherData &&
+    //     tDetials.existingTeacherData.length);
+    //   i++
+    // ) {
+    //   let teacherDate = {
+    //     teacherInfo: tDetials.existingTeacherData[i],
+    //   };
+    //   tFeildDetails.push(teacherDate);
+    // }
+
+    // this.setState({
+    //   tFeildDetails,
+    // });
+  }
+
+  handleRemove = (id) => {
+    let filterTeacherDetails = this.state.tFeildDetails.filter(
+      (teacher) => teacher.id !== id
+    );
+    console.log(this.state.filterTeacherDetails);
+    this.setState({
+      tFeildDetails: filterTeacherDetails,
+    });
+  };
+
   validate = () => {
     let nameError = "";
     let teacherIdError = "";
@@ -58,6 +102,23 @@ class Teacher extends React.Component {
     event.preventDefault();
     const isValid = this.validate();
     if (isValid) {
+      const teacher = {
+        name: this.state.name,
+        teacherId: this.state.tFeildDetails.length,
+        class: this.state.class,
+        section: this.state.section,
+      };
+      this.setState({
+        tFeildDetails: [...this.state.tFeildDetails, teacher],
+      });
+      // let existingTeacherData = localStorage.getItem("teacher_data");
+      // existingTeacherData = JSON.parse(existingTeacherData);
+      // existingTeacherData.teacherDate.push({
+      //   ...this.state,
+      //   ...{ id: existingTeacherData.teacherDate.length + 1 },
+      // });
+      // localStorage.setItem("teacher_data", JSON.stringify(existingTeacherData));
+
       console.log(this.state);
       // clear the form
       this.setState(initialState);
@@ -139,6 +200,38 @@ class Teacher extends React.Component {
             <Button btnName="Submit" type="submit" />
           </form>
         </div>
+
+        <table className={styles.teacherDetails}>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Class & Sec</th>
+              <th>
+                <i className={"far fa-edit"}></i>/
+                <i className={"fas fa-trash-alt"}></i>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.tFeildDetails &&
+              this.state.tFeildDetails.map((teacher, id) => (
+                <tr key={id}>
+                  <td>{teacher.teacherId}</td>
+                  <td>{teacher.name}</td>
+                  <td>
+                    {teacher.class} & {teacher.section}
+                  </td>
+                  <td>
+                    <i
+                      className={"fas fa-trash-alt"}
+                      onClick={() => this.handleRemove(teacher.id)}
+                    ></i>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
       </div>
     );
   }

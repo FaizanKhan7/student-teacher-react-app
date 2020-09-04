@@ -22,7 +22,7 @@
 .formLayout label {
     display: block;
     max-width: 668px;
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     font-size: 18px;
     font-weight: 600;
@@ -30,7 +30,7 @@
 
 .formLayout select {
     display: block;
-    width: 80%;
+    width: 90%;
     max-width: 668px;
     margin: 10px auto 0;
     padding: 5px;
@@ -53,7 +53,7 @@
 .errors {
     display: block;
     max-width: 668px;
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     color: rgb(204, 2, 2);
     font-size: 14px;
