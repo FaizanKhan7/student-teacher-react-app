@@ -16,6 +16,7 @@ const initialState = {
 class Student extends React.Component {
   state = {
     initialState,
+    tFeildDetails: [],
   };
 
   handleChange = (event) => {
@@ -24,6 +25,25 @@ class Student extends React.Component {
     });
   };
 
+  componentDidMount() {
+    if (!localStorage.getItem("student_data")) {
+      localStorage.setItem("student_data", JSON.stringify({ studentDate: [] }));
+    }
+
+    let tDetials = JSON.parse(localStorage.getItem("student_data"));
+    this.setState({
+      tFeildDetails: tDetials ? tDetials.studentDate : [],
+    });
+  }
+  handleRemove = (id) => {
+    let filterstudentDetails = this.state.tFeildDetails.filter(
+      (student) => student.id !== id
+    );
+    console.log(this.state.filterstudentDetails);
+    this.setState({
+      tFeildDetails: filterstudentDetails,
+    });
+  };
   validate = () => {
     let nameError = "";
     let rollNoError = "";
@@ -59,6 +79,15 @@ class Student extends React.Component {
     event.preventDefault();
     const isValid = this.validate();
     if (isValid) {
+      const student = {
+        name: this.state.name,
+        studentId: this.state.tFeildDetails.length,
+        class: this.state.class,
+        section: this.state.section,
+      };
+      this.setState({
+        tFeildDetails: [...this.state.tFeildDetails, student],
+      });
       console.log(this.state);
       // clear the form
       this.setState(initialState);
@@ -141,6 +170,37 @@ class Student extends React.Component {
             <Button btnName="Submit" type="submit" />
           </form>
         </div>
+        <table className={styles.studentDetails}>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Class & Sec</th>
+              <th>
+                <i className={"far fa-edit"}></i>/
+                <i className={"fas fa-trash-alt"}></i>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.tFeildDetails &&
+              this.state.tFeildDetails.map((student, id) => (
+                <tr key={id}>
+                  <td>{student.studentId}</td>
+                  <td>{student.name}</td>
+                  <td>
+                    {student.class} & {student.section}
+                  </td>
+                  <td>
+                    <i
+                      className={"fas fa-trash-alt"}
+                      onClick={() => this.handleRemove(student.id)}
+                    ></i>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
       </div>
     );
   }
